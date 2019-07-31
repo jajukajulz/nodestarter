@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-/* Login. */
+/* Render Login page. */
 router.get('/login',
   function(req, res){
     res.render('login');
   });
 
-/* Login redirect on failure. */
+/* Process Login form submission. */
 router.post('/login',
   passport.authenticate('local', { failureRedirect: '/login' }),
   function(req, res) {
