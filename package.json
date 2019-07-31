@@ -1,9 +1,9 @@
 {
-  "name": "propertytoken",
+  "name": "nodestarter",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "DEBUG=propertytoken:* npm start",
+    "dev": "DEBUG=nodestarter:* npm start",
     "start": "node ./bin/www"
   },
   "dependencies": {
