@@ -12,6 +12,9 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
 
+var ROLES = require('./utils/roles');
+
+
 var app = express();
 
 // view engine setup
