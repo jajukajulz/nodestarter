@@ -10,7 +10,7 @@
 <% if (!user) { %>
       <p>Welcome! Please <a href="/auth/login">log in</a>.</p>
     <% } else { %>
-        <p>Hello, <%= user.username %>. View your <a href="/users/profile">profile</a>.</p>
+        <p>Hello, <%= user.username%> (<%= user.group%>). View your <a href="/users/profile">profile</a>.</p>
         <p><a href="/users">Users Listing</a></p>
         <p><a href="/form">Sample Form</a></p>
         <p><a href="/auth/logout">Log out</a></p>
