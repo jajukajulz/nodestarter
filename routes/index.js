@@ -25,9 +25,16 @@ router.post('/form', [
   }
   if (!result.isEmpty()) {
   //response validate data to form.ejs
+    req.flash('error', errors)
      res.render('form', {
        title: 'Express',
       errors: errors
+    })
+  }
+  else{
+    req.flash('success', 'Form is valid')
+     res.render('form', {
+       title: 'Express'
     })
   }
 });
