@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing for an admin.
-* TODO check if user is admin before showing this page */
+/* GET users listing for an admin  - /users */
+/* TODO check if user is admin before showing this page */
 router.get('/',
     require('connect-ensure-login').ensureLoggedIn({ redirectTo: '/auth/login' }),
     function(req, res, next) {
@@ -10,7 +10,7 @@ router.get('/',
       /*res.send('respond with a resource'); */
 });
 
-/* GET user profile. */
+/* GET user profile - /users/profile */
 router.get('/profile',
   require('connect-ensure-login').ensureLoggedIn({ redirectTo: '/auth/login' }),
   function(req, res){
