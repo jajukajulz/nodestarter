@@ -14,7 +14,7 @@
         </div>
     <% } %>
 
-    <form action="/auth/login" method="post">
+    <form method="post">
         <div>
         <label>Username:</label>
         <input type="text" name="username"/><br/>
@@ -24,7 +24,8 @@
         <input type="password" name="password"/>
         </div>
         <div>
-        <input type="submit" value="Submit"/>
+        <button type="submit" formaction="/auth/login">Local Auth</button>
+        <button type="submit" formaction="/auth/dblogin">DB Auth (WIP -Need to add DB logic)</button>
         </div>
     </form>
   </body>

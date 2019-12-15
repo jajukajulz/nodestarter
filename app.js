@@ -51,7 +51,24 @@ app.use('/auth', authRouter);
 // (`username` and `password`) submitted by the user.  The function must verify
 // that the password is correct and then invoke `cb` with a user object, which
 // will be set at `req.user` in route handlers after authentication.
-passport.use(new LocalStrategy(
+
+// We will use two LocalStrategies, one for file-based auth and another for db-auth
+passport.use('file-local', new LocalStrategy(
+  function(username, password, cb) {
+    db.users.findByUsername(username, function(err, user) {
+      if (err) { return cb(err); }
+      if (!user) { 
+        return cb(null, false, { message: 'Incorrect username.' }); 
+      }
+      if (user.password != password) { 
+        return cb(null, false, { message: 'Incorrect password.' }); 
+      }
+      return cb(null, user); // If the credentials are valid, the verify callback invokes done to supply Passport with the user that authenticated.
+    });
+  }));
+
+
+passport.use('db-local', new LocalStrategy(
   function(username, password, cb) {
     db.users.findByUsername(username, function(err, user) {
       if (err) { return cb(err); }

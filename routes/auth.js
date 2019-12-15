@@ -9,10 +9,18 @@ router.get('/login',
     res.render('login', { title: 'User Login' });
   });
 
-/* Process Login form submission. */
+/* Process Login form submission (File Based Auth). */
 /* TODO add a user not found message */
 router.post('/login',
-  passport.authenticate('local', {  successRedirect: '/',
+  passport.authenticate('file-local', {  successRedirect: '/',
+                                    failureRedirect: '/auth/login', 
+                                    failureFlash: true }) //instruct Passport to flash an error message using the message given by the strategy's verify callback, if any
+            );
+
+/* Process  Login form submission (DB Based Auth). */
+/* TODO add a user not found message */
+router.post('/dblogin',
+  passport.authenticate('db-local', {  successRedirect: '/',
                                     failureRedirect: '/auth/login', 
                                     failureFlash: true }) //instruct Passport to flash an error message using the message given by the strategy's verify callback, if any
             );
