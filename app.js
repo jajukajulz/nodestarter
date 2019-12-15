@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var flash = require('express-flash');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -24,6 +25,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(flash());
+
+app.use(function(req,res,next){
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success")
+  next();
+})
 
 // Initialize Passport and restore authentication state, if any, from the
 // session.
@@ -47,9 +55,13 @@ passport.use(new LocalStrategy(
   function(username, password, cb) {
     db.users.findByUsername(username, function(err, user) {
       if (err) { return cb(err); }
-      if (!user) { return cb(null, false); }
-      if (user.password != password) { return cb(null, false, { errors: { 'email or password': 'is invalid' } }); }
-      return cb(null, user);
+      if (!user) { 
+        return cb(null, false, { message: 'Incorrect username.' }); 
+      }
+      if (user.password != password) { 
+        return cb(null, false, { message: 'Incorrect password.' }); 
+      }
+      return cb(null, user); // If the credentials are valid, the verify callback invokes done to supply Passport with the user that authenticated.
     });
   }));
 

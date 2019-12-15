@@ -12,10 +12,10 @@ router.get('/login',
 /* Process Login form submission. */
 /* TODO add a user not found message */
 router.post('/login',
-  passport.authenticate('local', { failureRedirect: '/auth/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
+  passport.authenticate('local', {  successRedirect: '/',
+                                    failureRedirect: '/auth/login', 
+                                    failureFlash: true }) //instruct Passport to flash an error message using the message given by the strategy's verify callback, if any
+            );
 
 /* Logout. */
 router.get('/logout',

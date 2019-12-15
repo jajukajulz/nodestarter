@@ -5,6 +5,15 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+
+      <% if(error && error.length > 0) { %>
+        <div class="alert alert-danger" role="alert">
+            <div class="container">
+                <%= error %>
+            </div>
+        </div>
+    <% } %>
+
     <form action="/auth/login" method="post">
         <div>
         <label>Username:</label>
