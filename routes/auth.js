@@ -12,7 +12,7 @@ router.get('/login',
 /* Process Login form submission (File Based Auth). */
 /* TODO add a user not found message */
 router.post('/login',
-  passport.authenticate('file-local', {  successRedirect: '/',
+  passport.authenticate('file-local', {  successReturnToOrRedirect: '/',
                                     failureRedirect: '/auth/login', 
                                     failureFlash: true }) //instruct Passport to flash an error message using the message given by the strategy's verify callback, if any
             );
@@ -20,7 +20,7 @@ router.post('/login',
 /* Process  Login form submission (DB Based Auth). */
 /* TODO add a user not found message */
 router.post('/dblogin',
-  passport.authenticate('db-local', {  successRedirect: '/',
+  passport.authenticate('db-local', {  successReturnToOrRedirect: '/',
                                     failureRedirect: '/auth/login', 
                                     failureFlash: true }) //instruct Passport to flash an error message using the message given by the strategy's verify callback, if any
             );
