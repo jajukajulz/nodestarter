@@ -5,12 +5,15 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+        <!-- Start Success and Error Messages -->
+        <% include ./notificationbar %>
+        <!-- End Success and Error Messages -->
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 <% if (!user) { %>
       <p>Welcome! Please <a href="/auth/login">log in</a>.</p>
     <% } else { %>
-        <p>Hello, <%= user.username%> (<%= user.group%>). View your <a href="/users/profile">profile</a>.</p>
+        <p>Hello, <%= user.username%> (<%= user.role%>). View your <a href="/users/profile">profile</a>.</p>
         <p><a href="/users">Users Listing</a></p>
         <p><a href="/form">Sample Form</a></p>
         <p><a href="/auth/logout">Log out</a></p>
