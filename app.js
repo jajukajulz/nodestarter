@@ -56,7 +56,10 @@ app.use('/auth', authRouter);
 // will be set at `req.user` in route handlers after authentication.
 
 // We will use two LocalStrategies, one for file-based auth and another for db-auth
-passport.use('file-local', new LocalStrategy(
+passport.use('file-local', new LocalStrategy({
+  usernameField: 'username', //useful for custom id's on yor credentials fields, if this is incorrect you get a missing credentials error
+  passwordField: 'password', //useful for custom id's on yor credentials fields
+  },
   function(username, password, cb) {
     db.users.findByUsername(username, function(err, user) {
       if (err) { return cb(err); }
